@@ -36,7 +36,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 @WebMvcTest(value = {ControllerAndPropertiesTest.class, AccountController.class, CustomerController.class})
-@ExtendWith(ResultAnalyzer2.class)
+//@ExtendWith(ResultAnalyzer2.class)
 class ControllerAndPropertiesTest {
 
     @Autowired
@@ -115,7 +115,7 @@ class ControllerAndPropertiesTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", hasSize(1)))
-                .andExpect(jsonPath("$[0].id", is((int) sampleAccountForAccountControllerTest.getId())))
+                .andExpect(jsonPath("$[0].id", is(sampleAccountForAccountControllerTest.getId())))
                 .andExpect(jsonPath("$[0].accountName", is(sampleAccountForAccountControllerTest.getAccountName())));
 
         verify(accountService).findAll();
@@ -129,7 +129,7 @@ class ControllerAndPropertiesTest {
         mockMvc.perform(get("/account/{id}", sampleAccountForAccountControllerTest.getId()))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.id", is((int) sampleAccountForAccountControllerTest.getId())))
+                .andExpect(jsonPath("$.id", is(sampleAccountForAccountControllerTest.getId())))
                 .andExpect(jsonPath("$.accountName", is(sampleAccountForAccountControllerTest.getAccountName())));
 
         verify(accountService).find(sampleAccountForAccountControllerTest.getId());
@@ -145,7 +145,7 @@ class ControllerAndPropertiesTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(sampleAccountForAccountControllerTest)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id", is((int) sampleAccountForAccountControllerTest.getId())))
+                .andExpect(jsonPath("$.id", is(sampleAccountForAccountControllerTest.getId())))
                 .andExpect(jsonPath("$.accountName", is(sampleAccountForAccountControllerTest.getAccountName())));
 
         verify(customerService).find(sampleCustomerForAccountControllerTest.getId());
@@ -175,7 +175,7 @@ class ControllerAndPropertiesTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(updatedAccount)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id", is((int) updatedAccount.getId())))
+                .andExpect(jsonPath("$.id", is(updatedAccount.getId())))
                 .andExpect(jsonPath("$.accountName", is(updatedAccount.getAccountName())))
                 .andExpect(jsonPath("$.moneyAmount", is(updatedAccount.getMoneyAmount())));
 
@@ -192,7 +192,7 @@ class ControllerAndPropertiesTest {
 
         mockMvc.perform(delete("/account/{id}", sampleAccountForAccountControllerTest.getId()))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id", is((int) sampleAccountForAccountControllerTest.getId())))
+                .andExpect(jsonPath("$.id", is(sampleAccountForAccountControllerTest.getId())))
                 .andExpect(jsonPath("$.accountName", is(sampleAccountForAccountControllerTest.getAccountName())))
                 .andExpect(jsonPath("$.moneyAmount", is(sampleAccountForAccountControllerTest.getMoneyAmount())));
 
@@ -205,7 +205,7 @@ class ControllerAndPropertiesTest {
     void testSaveCustomer() throws Exception {
         given(customerService.save(any())).willReturn(sampleCustomerForCustomerControllerTest);
 
-        CustomerResponse expectedResponse = new CustomerResponse(sampleCustomerForCustomerControllerTest.getId(), sampleCustomerForCustomerControllerTest.getEmail(), sampleCustomerForCustomerControllerTest.getSalary());
+        CustomerResponse expectedResponse = new CustomerResponse(sampleCustomerForCustomerControllerTest.getId(),sampleCustomerForCustomerControllerTest.getEmail(), sampleCustomerForCustomerControllerTest.getSalary());
 
         mockMvc.perform(post("/customer")
                         .contentType(MediaType.APPLICATION_JSON)

@@ -169,7 +169,7 @@ class MainTest {
     @Test
     @DisplayName("Test Account Entity Getters and Setters")
     void testAccountProperties() {
-        assertEquals(1L, sampleAccountForAccountEntity.getId());
+        assertEquals(1, sampleAccountForAccountEntity.getId());
         assertEquals("Savings", sampleAccountForAccountEntity.getAccountName());
         assertEquals(1500.0, sampleAccountForAccountEntity.getMoneyAmount(), 0.001);
         assertEquals(sampleCustomerForCustomerEntity, sampleAccountForAccountEntity.getCustomer());
@@ -179,7 +179,7 @@ class MainTest {
     @Test
     @DisplayName("Test Address Entity Getters and Setters")
     void testAddressProperties() {
-        assertEquals(1L, sampleAddressForAddressEntity.getId());
+        assertEquals(1, sampleAddressForAddressEntity.getId());
         assertEquals("Main Street", sampleAddressForAddressEntity.getStreet());
         assertEquals(100, sampleAddressForAddressEntity.getNo());
         assertEquals("Sample City", sampleAddressForAddressEntity.getCity());
@@ -204,7 +204,7 @@ class MainTest {
     @Test
     @DisplayName("Test Customer Entity Getters and Setters")
     void testCustomerProperties() {
-        assertEquals(2L, sampleCustomerForCustomerEntityTest.getId());
+        assertEquals(2, sampleCustomerForCustomerEntityTest.getId());
         assertEquals("Jane", sampleCustomerForCustomerEntityTest.getFirstName());
         assertEquals("Doe", sampleCustomerForCustomerEntityTest.getLastName());
         assertEquals("jane.doe@example.com", sampleCustomerForCustomerEntityTest.getEmail());
